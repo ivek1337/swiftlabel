@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  swiftlabel
-//
-//  Created by Kevin Suhajda on 12/08/2024.
-//
-
 import SwiftUI
 import MapKit
 import Foundation
@@ -21,17 +14,18 @@ func loadColor(from plist: String, key: String) -> Color {
 }
 
 // Function to load configuration data from plist
-func loadConfig(from plist: String = "Config") -> (hotelName: String, description: String, amenities: [String], location: String) {
+func loadConfig(from plist: String = "Config") -> (hotelName: String, description: String, amenities: [String], country: String, city: String) {
     guard let path = Bundle.main.path(forResource: plist, ofType: "plist"),
           let xml = FileManager.default.contents(atPath: path),
           let plist = try? PropertyListSerialization.propertyList(from: xml, options: .mutableContainersAndLeaves, format: nil) as? [String: Any],
           let hotelName = plist["hotelName"] as? String,
           let description = plist["hotelDescription"] as? String,
           let amenities = plist["amenities"] as? [String],
-          let location = plist["hotelLocation"] as? String else {
-        return ("Default Hotel", "", [], "Unknown Location") // Default values if loading fails
+          let country = plist["hotelCountry"] as? String,
+          let city = plist["hotelCity"] as? String else {
+        return ("Default Hotel", "", [], "Unknown Country", "Unknown City") // Default values if loading fails
     }
-    return (hotelName, description, amenities, location)
+    return (hotelName, description, amenities, country, city)
 }
 
 // Extension to create Color from hex string
@@ -57,7 +51,8 @@ struct InfoCardView: View {
     var hotelName: String
     var description: String
     var amenities: [String]
-    var location: String
+    var city: String
+    var country: String
     var rating: Double = 4.92
     var reviews: Int = 179
 
@@ -66,7 +61,8 @@ struct InfoCardView: View {
         self.hotelName = config.hotelName
         self.description = config.description
         self.amenities = config.amenities
-        self.location = config.location
+        self.city = config.city
+        self.country = config.country
     }
 
     var body: some View {
@@ -92,7 +88,7 @@ struct InfoCardView: View {
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
                             .foregroundColor(.black)
-                        Text(location) // Use the loaded hotel location here
+                        Text("\(city), \(country)") // Use the loaded hotel city and country here
                             .font(.subheadline)
                             .foregroundColor(.black) // Ensure text is visible
                     }
@@ -165,7 +161,8 @@ struct InfoCardView: View {
 struct HomeView: View {
     @State private var showInfoCard = false
     @State private var hotelName: String = ""
-    @State private var hotelLocation: String = ""
+    @State private var hotelCity: String = ""
+    @State private var hotelCountry: String = ""
 
     var body: some View {
         GeometryReader { geometry in
@@ -195,7 +192,7 @@ struct HomeView: View {
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.white)
-                            Text(hotelLocation) // Use the loaded hotel location here
+                            Text("\(hotelCity), \(hotelCountry)") // Use the loaded hotel city and country here
                                 .font(.subheadline)
                                 .foregroundColor(.white)
                         }
@@ -230,7 +227,8 @@ struct HomeView: View {
         .onAppear {
             let config = loadConfig()
             hotelName = config.hotelName // Load the hotel name when the view appears
-            hotelLocation = config.location // Load the hotel location when the view appears
+            hotelCity = config.city // Load the hotel city when the view appears
+            hotelCountry = config.country // Load the hotel country when the view appears
         }
     }
 }
@@ -374,3 +372,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+

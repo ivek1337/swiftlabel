@@ -31,5 +31,9 @@
     <string>This is a beautiful hotel located in the heart of the city. It offers luxurious amenities and excellent service.</string>
     <key>hotelLocation</key>
     <string>Budapest, Hungary</string>
+    <key>hotelCountry</key>
+    <string>Hungary</string>
+    <key>hotelCity</key>
+    <string>Budapest</string>
 </dict>
 </plist>
