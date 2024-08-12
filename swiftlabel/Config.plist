@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>longitude</key>
+	<real>13.377757741860455</real>
+	<key>latitude</key>
+	<real>52.51645738041945</real>
+	<key>backgroundColor</key>
+	<string>#3498db</string>
+    <key>markerName</key>
+    <string>Hotel Budapest</string>
+    <key>amenities</key>
+        <array>
+            <string>Wi-Fi</string>
+            <string>55" HDTV</string>
+            <string>Free Parking</string>
+            <string>Mini bar</string>
+            <string>Ironing board</string>
+            <string>Pool table</string>
+            <string>Hair dryer</string>
+            <string>Sauna</string>
+            <string>Pool</string>
+            <string>Restaurant</string>
+            <string>Gym</string>
+            <string>Spa</string>
+        </array>
+    <key>hotelName</key>
+    <string>Hotel Budapest</string>
+    <key>hotelDescription</key>
+    <string>This is a beautiful hotel located in the heart of the city. It offers luxurious amenities and excellent service.</string>
+    <key>hotelLocation</key>
+    <string>Budapest, Hungary</string>
+</dict>
+</plist>
