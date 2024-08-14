@@ -6,7 +6,7 @@ workflows:
       environment:
         ios_signing:
           distribution_type: app_store
-          bundle_identifier: io.codemagic.swiftwhitelabel.dev
+          bundle_identifier: ${BUNDLE_ID}
         xcode: 15.4
         cocoapods: default
         groups:
