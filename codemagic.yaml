@@ -2,12 +2,12 @@ workflows:
     ios-workflow:
       name: iOS Workflow
       integrations:
-        app_store_connect: ${API_KEY_NAME} # < -- Put API Key Name from Teams > Settings > Integrations > App Store Connect
+        app_store_connect: ${API_KEY_NAME}
       environment:
         ios_signing:
           distribution_type: app_store
           bundle_identifier: ${BUNDLE_ID}
-        xcode: 15.4 # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
+        xcode: 15.4
         cocoapods: default
       triggering:
         events:
