@@ -22,9 +22,9 @@ workflows:
         - name: Install CocoaPods dependencies
           script: |
             pod install
-        # - name: Set up code signing settings on Xcode project
-        #   script: |
-        #     xcode-project use-profiles
+        - name: Set up code signing settings on Xcode project
+          script: |
+            xcode-project use-profiles
         - name: Increment build number
           script: |
             agvtool new-version -all $(($BUILD_NUMBER + 1))
