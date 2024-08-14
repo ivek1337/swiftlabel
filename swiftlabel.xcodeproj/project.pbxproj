@@ -12,6 +12,7 @@
 		0A6701BF2C6A0FA200BDB255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6701BE2C6A0FA200BDB255 /* Assets.xcassets */; };
 		0A6701C22C6A0FA200BDB255 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6701C12C6A0FA200BDB255 /* Preview Assets.xcassets */; };
 		0A6701C92C6A111F00BDB255 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6701C82C6A111F00BDB255 /* Config.plist */; };
+		0A6701CC2C6B9EF600BDB255 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A6701CB2C6B9EF600BDB255 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,8 @@
 		0A6701BE2C6A0FA200BDB255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A6701C12C6A0FA200BDB255 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0A6701C82C6A111F00BDB255 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Config.plist; path = swiftlabel/Config.plist; sourceTree = "<group>"; };
+		0A6701CA2C6B6E7700BDB255 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0A6701CB2C6B9EF600BDB255 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +40,7 @@
 		0A6701AE2C6A0FA000BDB255 = {
 			isa = PBXGroup;
 			children = (
+				0A6701CB2C6B9EF600BDB255 /* Launch Screen.storyboard */,
 				0A6701C82C6A111F00BDB255 /* Config.plist */,
 				0A6701B92C6A0FA000BDB255 /* swiftlabel */,
 				0A6701B82C6A0FA000BDB255 /* Products */,
@@ -54,6 +58,7 @@
 		0A6701B92C6A0FA000BDB255 /* swiftlabel */ = {
 			isa = PBXGroup;
 			children = (
+				0A6701CA2C6B6E7700BDB255 /* Info.plist */,
 				0A6701BA2C6A0FA000BDB255 /* swiftlabelApp.swift */,
 				0A6701BC2C6A0FA000BDB255 /* ContentView.swift */,
 				0A6701BE2C6A0FA200BDB255 /* Assets.xcassets */,
@@ -130,6 +135,7 @@
 			files = (
 				0A6701C22C6A0FA200BDB255 /* Preview Assets.xcassets in Resources */,
 				0A6701C92C6A111F00BDB255 /* Config.plist in Resources */,
+				0A6701CC2C6B9EF600BDB255 /* Launch Screen.storyboard in Resources */,
 				0A6701BF2C6A0FA200BDB255 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,17 +285,18 @@
 				DEVELOPMENT_TEAM = X8NNQ9CYL2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = swiftlabel/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel;
+				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -308,17 +315,18 @@
 				DEVELOPMENT_TEAM = X8NNQ9CYL2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = swiftlabel/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel;
+				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

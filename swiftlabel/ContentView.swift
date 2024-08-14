@@ -55,6 +55,7 @@ struct InfoCardView: View {
     var country: String
     var rating: Double = 4.92
     var reviews: Int = 179
+    var backgroundColor: Color = loadColor(from: "Config", key: "backgroundColor")
 
     init() {
         let config = loadConfig()
@@ -141,12 +142,14 @@ struct InfoCardView: View {
                 
                 // Dismiss button
                 Button(action: {
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                    impactFeedback.impactOccurred()
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Dismiss")
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.blue)
+                        .background(backgroundColor)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
@@ -202,21 +205,44 @@ struct HomeView: View {
                     
                     // Bottom third with button
                     VStack {
-                        Spacer() // to center the button in the bottom third
+                        Spacer()
                         Button(action: {
+                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                            impactFeedback.impactOccurred()
                             showInfoCard = true
                         }) {
                             Text("More Info")
                                 .font(.system(size: 14))
+                                .fontWeight(.medium)
                                 .padding(10)
                                 .frame(width: geometry.size.width * 0.3)
-                                .background(Color.white)
-                                .foregroundColor(.black)
+                                .foregroundColor(.white)  // Set text color to white
+                                .background(Color.clear)  // Set background to clear to remove any fill
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color.white, lineWidth: 2)  // White outline with 2px thickness
+                                )
                                 .cornerRadius(25)
                         }
                         .fullScreenCover(isPresented: $showInfoCard) {
                             InfoCardView()
                         }
+//                        Button(action: {
+//                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+//                            impactFeedback.impactOccurred()
+//                            showInfoCard = true
+//                        }) {
+//                            Text("More Info")
+//                                .font(.system(size: 14))
+//                                .padding(10)
+//                                .frame(width: geometry.size.width * 0.3)
+//                                .background(Color.white)
+//                                .foregroundColor(.black)
+//                                .cornerRadius(25)
+//                        }
+//                        .fullScreenCover(isPresented: $showInfoCard) {
+//                            InfoCardView()
+//                        }
                         Spacer() // to center the button in the bottom third
                     }
                     .frame(height: geometry.size.height / 3)
@@ -270,6 +296,8 @@ struct RoundedCorners: Shape {
 struct FlowLayout: View {
     let items: [String]
     let spacing: CGFloat = 5
+    var pillColor: Color = loadColor(from: "Config", key: "pillColor")
+    var pillTextColor: Color = loadColor(from: "Config", key: "pillTextColor")
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
@@ -278,11 +306,13 @@ struct FlowLayout: View {
                     ForEach(rowItems, id: \.self) { item in
                         Text(item)
                             .font(.system(size: 12))
+                            .foregroundColor(pillTextColor)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
-                            .background(Color.gray.opacity(0.2))
+//                            .background(Color.gray.opacity(0.2))
+                            .background(pillColor)
                             .cornerRadius(10)
                     }
                 }
@@ -316,7 +346,7 @@ struct LocationView: View {
     struct LocationData: Codable {
         let latitude: Double
         let longitude: Double
-        let markerName: String?
+        let hotelName: String?
     }
     
     static func loadLocationData() -> LocationData {
@@ -340,31 +370,40 @@ struct LocationView: View {
             print("Config.plist not found")
         }
         // Fallback data if plist data is not available
-        return LocationData(latitude: 47.51504562696981, longitude: 19.077860508882107, markerName: "Fallback Location")
+        return LocationData(latitude: 47.51504562696981, longitude: 19.077860508882107, hotelName: "Fallback Location")
     }
     
     let locationData: LocationData = LocationView.loadLocationData()
     
     var body: some View {
         Map(initialPosition: .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude), span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)))) {
-            Marker(locationData.markerName ?? "Default Marker", systemImage: "building", coordinate: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude))
+            Marker(locationData.hotelName ?? "Default Marker", systemImage: "building", coordinate: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude))
         }
         .mapStyle(.hybrid)
     }
 }
 
+
 struct ContentView: View {
+    @State private var selectedTab = 0
+
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+                .tag(0)
             
             LocationView()
                 .tabItem {
                     Label("Location", systemImage: "pin")
                 }
+                .tag(1)
+        }
+        .onChange(of: selectedTab) {
+            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+                        impactFeedback.impactOccurred()
         }
     }
 }

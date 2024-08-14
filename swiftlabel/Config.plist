@@ -2,38 +2,34 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>longitude</key>
-	<real>13.377757741860455</real>
 	<key>latitude</key>
-	<real>52.51645738041945</real>
+	<real>58.37539501707234</real>
+	<key>longitude</key>
+	<real>26.721860162778924</real>
 	<key>backgroundColor</key>
-	<string>#3498db</string>
-    <key>markerName</key>
-    <string>Hotel Budapest</string>
+	<string>#01561D</string>
+    <key>pillColor</key>
+    <string>#B120C9</string>
+    <key>pillTextColor</key>
+    <string>#FFFFFF</string>
     <key>amenities</key>
         <array>
             <string>Wi-Fi</string>
-            <string>55" HDTV</string>
+            <string>40" HDTV</string>
             <string>Free Parking</string>
             <string>Mini bar</string>
             <string>Ironing board</string>
             <string>Pool table</string>
             <string>Hair dryer</string>
-            <string>Sauna</string>
-            <string>Pool</string>
             <string>Restaurant</string>
-            <string>Gym</string>
-            <string>Spa</string>
         </array>
     <key>hotelName</key>
-    <string>Hotel Budapest</string>
+    <string>Tartu Hotel</string>
     <key>hotelDescription</key>
-    <string>This is a beautiful hotel located in the heart of the city. It offers luxurious amenities and excellent service.</string>
-    <key>hotelLocation</key>
-    <string>Budapest, Hungary</string>
+    <string>A charming hotel in Tartu, Estonia, offering modern comfort amidst historic surroundings, close to vibrant cultural sites, universities, and the scenic Emajõgi River—ideal for exploring the heart of the city.</string>
     <key>hotelCountry</key>
-    <string>Hungary</string>
+    <string>Estonia</string>
     <key>hotelCity</key>
-    <string>Budapest</string>
+    <string>Tartu</string>
 </dict>
 </plist>
