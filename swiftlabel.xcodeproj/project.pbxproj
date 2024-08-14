@@ -88,7 +88,6 @@
 				4DB2151BF1FEC603837D4114 /* Pods-swiftlabel.debug.xcconfig */,
 				A77F3AA04B9EF38EB279F8E6 /* Pods-swiftlabel.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -348,7 +347,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = io.codemagic.swiftwhitelabel.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -379,7 +378,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = codemagic.io.swiftlabel.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = io.codemagic.swiftwhitelabel.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
