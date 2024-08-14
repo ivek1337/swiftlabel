@@ -2,8 +2,7 @@ workflows:
     ios-workflow:
       name: iOS Workflow
       integrations:
-        # app_store_connect: ${API_KEY_NAME}
-        app_store_connect: CLIENT_001
+        app_store_connect: ${API_KEY_NAME}
       environment:
         ios_signing:
           distribution_type: app_store
