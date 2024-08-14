@@ -9,6 +9,8 @@ workflows:
           bundle_identifier: ${BUNDLE_ID}
         xcode: 15.4
         cocoapods: default
+        groups:
+          - client_001
       triggering:
         events:
           - push
