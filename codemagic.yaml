@@ -4,8 +4,6 @@ workflows:
       environment:
         xcode: 15.4
         cocoapods: default
-        groups:
-          - client_dev
       triggering:
         events:
           - push
