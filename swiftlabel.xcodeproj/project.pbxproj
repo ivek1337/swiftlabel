@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A3102652C6E36E100598515 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A3102642C6E36E100598515 /* Info.plist */; };
 		0A6701BB2C6A0FA000BDB255 /* swiftlabelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6701BA2C6A0FA000BDB255 /* swiftlabelApp.swift */; };
 		0A6701BD2C6A0FA000BDB255 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6701BC2C6A0FA000BDB255 /* ContentView.swift */; };
 		0A6701BF2C6A0FA200BDB255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A6701BE2C6A0FA200BDB255 /* Assets.xcassets */; };
@@ -162,7 +161,6 @@
 				0A6701C22C6A0FA200BDB255 /* Preview Assets.xcassets in Resources */,
 				0A6701C92C6A111F00BDB255 /* Config.plist in Resources */,
 				0A6701CC2C6B9EF600BDB255 /* Launch Screen.storyboard in Resources */,
-				0A3102652C6E36E100598515 /* Info.plist in Resources */,
 				0A6701BF2C6A0FA200BDB255 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
