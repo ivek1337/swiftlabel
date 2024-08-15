@@ -10,7 +10,7 @@ workflows:
         xcode: 15.4
         cocoapods: default
         groups:
-          - client_001
+          - client_dev
       triggering:
         events:
           - push
@@ -32,7 +32,7 @@ workflows:
 
         - name: Build ipa for distribution
           script: |
-            xcode-project build-ipa --workspace "$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME"
+            xcode-project build-ipa --workspace "swiftlabel.xcworkspace" --scheme "swiftlabel"
       artifacts:
         - build/ios/ipa/*.ipa
         - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
