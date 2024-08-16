@@ -18,12 +18,15 @@ definitions:
 workflows:
     ios-workflow:
       name: iOS Workflow
+      labels:
+        - ${CLIENT_ID}
       environment:
         xcode: 15.4
         cocoapods: default
         vars:
           <<: *env_vars
           XCODE_SCHEME: swiftlabel
+
         groups:
           - aws_credentials
       triggering:
