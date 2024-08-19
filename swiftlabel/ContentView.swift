@@ -1,6 +1,5 @@
 import SwiftUI
 import MapKit
-import Foundation
 
 // Function to load color from plist
 func loadColor(from plist: String, key: String) -> Color {
@@ -45,9 +44,13 @@ extension Color {
     }
 }
 
+import SwiftUI
+import MapKit
+
 struct InfoCardView: View {
     @Environment(\.presentationMode) var presentationMode
-    
+    @State private var showLocationView = false
+
     var hotelName: String
     var description: String
     var amenities: [String]
@@ -89,9 +92,13 @@ struct InfoCardView: View {
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
                             .foregroundColor(.black)
-                        Text("\(city), \(country)") // Use the loaded hotel city and country here
-                            .font(.subheadline)
-                            .foregroundColor(.black) // Ensure text is visible
+                        Button(action: {
+                            showLocationView = true // Trigger the presentation of LocationView
+                        }) {
+                            Text("\(city), \(country)") // Use the loaded hotel city and country here
+                                .font(.subheadline)
+                                .foregroundColor(.blue) // Make it look like a link
+                        }
                     }
                     .padding(.bottom, 1)
                     .padding(.horizontal)
@@ -158,11 +165,16 @@ struct InfoCardView: View {
             .padding(.bottom, 150)
             .background(Color.white) // Set background color to white
         }
+        .fullScreenCover(isPresented: $showLocationView) {
+            LocationView()
+        }
     }
 }
 
+
 struct HomeView: View {
     @State private var showInfoCard = false
+    @State private var showLocationView = false
     @State private var hotelName: String = ""
     @State private var hotelCity: String = ""
     @State private var hotelCountry: String = ""
@@ -195,9 +207,13 @@ struct HomeView: View {
                         HStack {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.white)
-                            Text("\(hotelCity), \(hotelCountry)") // Use the loaded hotel city and country here
-                                .font(.subheadline)
-                                .foregroundColor(.white)
+                            Button(action: {
+                                showLocationView = true // Show the LocationView when tapped
+                            }) {
+                                Text("\(hotelCity), \(hotelCountry)") // Use the loaded hotel city and country here
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                            }
                         }
                         Spacer()
                     }
@@ -227,22 +243,6 @@ struct HomeView: View {
                         .fullScreenCover(isPresented: $showInfoCard) {
                             InfoCardView()
                         }
-//                        Button(action: {
-//                            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-//                            impactFeedback.impactOccurred()
-//                            showInfoCard = true
-//                        }) {
-//                            Text("More Info")
-//                                .font(.system(size: 14))
-//                                .padding(10)
-//                                .frame(width: geometry.size.width * 0.3)
-//                                .background(Color.white)
-//                                .foregroundColor(.black)
-//                                .cornerRadius(25)
-//                        }
-//                        .fullScreenCover(isPresented: $showInfoCard) {
-//                            InfoCardView()
-//                        }
                         Spacer() // to center the button in the bottom third
                     }
                     .frame(height: geometry.size.height / 3)
@@ -255,6 +255,9 @@ struct HomeView: View {
             hotelName = config.hotelName // Load the hotel name when the view appears
             hotelCity = config.city // Load the hotel city when the view appears
             hotelCountry = config.country // Load the hotel country when the view appears
+        }
+        .fullScreenCover(isPresented: $showLocationView) {
+            LocationView()
         }
     }
 }
@@ -311,7 +314,6 @@ struct FlowLayout: View {
                             .minimumScaleFactor(0.5)
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
-//                            .background(Color.gray.opacity(0.2))
                             .background(pillColor)
                             .cornerRadius(10)
                     }
@@ -342,19 +344,20 @@ struct FlowLayout: View {
 }
 
 struct LocationView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
+
     struct LocationData: Codable {
         let latitude: Double
         let longitude: Double
         let hotelName: String?
     }
-    
+
     static func loadLocationData() -> LocationData {
         if let url = Bundle.main.url(forResource: "Config", withExtension: "plist") {
             print("Found Config.plist")
             if let data = try? Data(contentsOf: url) {
                 print("Loaded data from Config.plist")
-                
+
                 do {
                     let decoder = PropertyListDecoder()
                     let locationData = try decoder.decode(LocationData.self, from: data)
@@ -372,39 +375,35 @@ struct LocationView: View {
         // Fallback data if plist data is not available
         return LocationData(latitude: 47.51504562696981, longitude: 19.077860508882107, hotelName: "Fallback Location")
     }
-    
+
     let locationData: LocationData = LocationView.loadLocationData()
-    
+
     var body: some View {
-        Map(initialPosition: .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude), span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)))) {
-            Marker(locationData.hotelName ?? "Default Marker", systemImage: "building", coordinate: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude))
+        ZStack(alignment: .topLeading) {
+            Map(initialPosition: .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude), span: MKCoordinateSpan(latitudeDelta: 0.004, longitudeDelta: 0.004)))) {
+                Marker(locationData.hotelName ?? "Default Marker", systemImage: "building", coordinate: CLLocationCoordinate2D(latitude: locationData.latitude, longitude: locationData.longitude))
+            }
+            .mapStyle(.hybrid)
+            .edgesIgnoringSafeArea(.all)
+
+            // Back button
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.black.opacity(1.0))
+                    .clipShape(Circle())
+            }
+            .padding([.top, .leading], 16)
         }
-        .mapStyle(.hybrid)
     }
 }
 
-
 struct ContentView: View {
-    @State private var selectedTab = 0
-
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .tag(0)
-            
-            LocationView()
-                .tabItem {
-                    Label("Location", systemImage: "pin")
-                }
-                .tag(1)
-        }
-        .onChange(of: selectedTab) {
-            let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
-                        impactFeedback.impactOccurred()
-        }
+        HomeView()
     }
 }
 
