@@ -1,7 +1,7 @@
 definitions:     
   env_vars: &env_vars
     S3_BUCKET_NAME: cmswiftwhitelabel # The name of your S3 bucket that have all of your clients assets.
-    APP_ICON: AppIcon.appiconset # The name of your folder in S3 bucket that have the client's iOS assets from (/ios/Runner/Assets.xcassets/).
+    APP_ICON: AppIcon.appiconset
     HEADER: header.imageset
     LAUNCH_SCREEN: launchScreenColor.colorset
   scripts:
