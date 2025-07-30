@@ -21,11 +21,11 @@ workflows:
       labels:
         - ${CLIENT_ID}
       environment:
-        xcode: 15.4
         cocoapods: default
         vars:
           <<: *env_vars
           XCODE_SCHEME: swiftlabel
+          CLIENT_ID: "_"
 
         groups:
           - aws_credentials
