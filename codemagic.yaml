@@ -1,18 +1,33 @@
 definitions:     
   env_vars: &env_vars
-    S3_BUCKET_NAME: cmswiftwhitelabel # The name of your S3 bucket that have all of your clients assets.
+    #S3_BUCKET_NAME: cmswiftwhitelabel # The name of your S3 bucket that have all of your clients assets.
     APP_ICON: AppIcon.appiconset
     HEADER: header.imageset
     LAUNCH_SCREEN: launchScreenColor.colorset
+    CLOUDINARY_CLOUD_NAME: $cloudinary_name  # Your Cloudinary cloud name
+    CLOUDINARY_API_KEY: $cloudinary_api_key         # Your Cloudinary API key
+    CLOUDINARY_API_SECRET: $cloudinary_api_secret   # Your Cloudinary API secret
   scripts:
     - &get_assets
-      name: Get assets from AWS S3 bucket
+      name: Get assets from Cloudinary #AWS S3 bucket
       script: |
         ASSETS_FOLDER=assets_${CLIENT_ID}
         echo "ASSETS_FOLDER=$ASSETS_FOLDER" >> $CM_ENV
         
-        aws s3 cp s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.tar.gz $ASSETS_FOLDER.tar.gz
+        #aws s3 cp s3://$S3_BUCKET_NAME/$ASSETS_FOLDER.tar.gz $ASSETS_FOLDER.tar.gz
         # unzip $ASSETS_FOLDER.zip -d $ASSETS_FOLDER
+        #tar -zxvf $ASSETS_FOLDER.tar.gz
+
+        # Create timestamp for signed URL
+        TIMESTAMP=$(date +%s)
+        
+        # Generate Cloudinary signed download URL for the tar.gz (assumes folder structure mirrors S3)
+        DOWNLOAD_URL="https://${CLOUDINARY_CLOUD_NAME}.cloudinary.com/${ASSETS_FOLDER}/${ASSETS_FOLDER}.tar.gz"
+        SIGNATURE=$(echo -n "${TIMESTAMP}${ASSETS_FOLDER}/${ASSETS_FOLDER}.tar.gz${CLOUDINARY_API_SECRET}" | shasum -a 256 | cut -d' ' -f1 | xxd -r -p | base64 | tr -d '=' | tr '+/' '-_')
+        
+        # Download using curl with signature
+        curl -L -o ${ASSETS_FOLDER}.tar.gz "${DOWNLOAD_URL}?timestamp=${TIMESTAMP}&signature=${SIGNATURE}"
+        
         tar -zxvf $ASSETS_FOLDER.tar.gz
 
 workflows:
@@ -29,13 +44,13 @@ workflows:
 
         groups:
           - aws_credentials
-      triggering:
-        events:
-          - push
-        branch_patterns:
-          - pattern: 'main'
-            include: true
-            source: true
+      #triggering:
+      #  events:
+      #    - push
+      #  branch_patterns:
+      #    - pattern: 'main'
+      #      include: true
+      #      source: true
       scripts:
         - *get_assets
 
